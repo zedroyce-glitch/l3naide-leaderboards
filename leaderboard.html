@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leaderboard — L3NAIDE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0d11;
+    --bg-raise:#0f1318;
+    --card:#10151b;
+    --card-hover:#141a21;
+    --border:rgba(255,255,255,0.08);
+    --border-strong:rgba(255,255,255,0.14);
+    --text:#e9edf1;
+    --muted:#8b96a3;
+    --muted-dim:#5d6773;
+    --blue:#a855f7;
+    --blue-dim:#8b2fe0;
+    --green:#7ed321;
+    --green-dim:#5aa617;
+    --green-glow:rgba(126,211,33,0.35);
+    --gold:#ffc93c;
+    --silver:#c9d3dc;
+    --bronze:#e0894a;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    line-height:1.5;
+  }
+  h1,h2,h3,.logo,.eyebrow,.stat-label,nav a{
+    font-family:'Rajdhani',sans-serif;
+    letter-spacing:0.03em;
+  }
+  a{color:inherit; text-decoration:none;}
+  button{font-family:inherit; cursor:pointer;}
+  ::selection{background:var(--green-glow);}
+
+  .wrap{max-width:1120px; margin:0 auto; padding:0 24px;}
+
+  /* ---------- NAV (matches home) ---------- */
+  header{
+    border-bottom:1px solid var(--border);
+    background:rgba(10,13,17,0.85);
+    backdrop-filter:blur(8px);
+    position:sticky; top:0; z-index:50;
+  }
+  nav.bar{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 24px; max-width:1120px; margin:0 auto;
+  }
+  .logo{
+    display:flex; align-items:center; gap:8px;
+    font-size:20px; font-weight:700; color:var(--blue);
+    letter-spacing:0.08em;
+  }
+  .logo svg{flex-shrink:0;}
+  .nav-links{display:flex; gap:36px; list-style:none;}
+  .nav-links a{
+    font-size:13px; font-weight:600; letter-spacing:0.12em;
+    color:var(--muted); padding-bottom:6px; border-bottom:2px solid transparent;
+    transition:color .15s ease, border-color .15s ease;
+  }
+  .nav-links a:hover{color:var(--text);}
+  .nav-links a.active{color:var(--blue); border-color:var(--blue);}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:13px; font-weight:600; letter-spacing:0.06em;
+    padding:11px 18px; border-radius:6px;
+    border:1px solid var(--border-strong);
+    background:transparent; color:var(--text);
+    transition:all .15s ease; white-space:nowrap;
+  }
+  .btn:hover{border-color:var(--blue); color:var(--blue); background:rgba(168,85,247,0.08);}
+  .btn.outline-blue{border-color:var(--blue-dim); color:var(--blue);}
+  .btn.outline-blue:hover{background:rgba(168,85,247,0.12); border-color:var(--blue);}
+
+  /* ---------- PAGE HEAD ---------- */
+  .page-head{
+    padding:56px 24px 32px; max-width:1120px; margin:0 auto;
+  }
+  .eyebrow{
+    display:flex; align-items:center; gap:8px;
+    font-size:12px; font-weight:700; letter-spacing:0.16em;
+    color:var(--blue); margin-bottom:16px;
+  }
+  .page-head h1{
+    font-size:52px; font-weight:700; line-height:1;
+    color:var(--blue); margin-bottom:12px;
+    text-shadow:0 0 40px rgba(168,85,247,0.3);
+  }
+  .page-head p{color:var(--muted); font-size:15px; max-width:520px;}
+  .live-pill{
+    display:inline-flex; align-items:center; gap:6px; font-size:10px; font-weight:700;
+    letter-spacing:0.08em; color:#ff5c5c; background:rgba(255,92,92,0.1);
+    border:1px solid rgba(255,92,92,0.3); border-radius:20px; padding:4px 10px;
+    margin-top:16px;
+  }
+  .live-pill .dot-red{width:6px; height:6px; border-radius:50%; background:#ff5c5c;}
+
+  /* ---------- CURRENCY TOGGLE ---------- */
+  .currency-toggle{
+    display:inline-flex; align-items:center; gap:2px;
+    background:var(--card); border:1px solid var(--border-strong);
+    border-radius:20px; padding:3px; margin-top:16px; margin-left:10px;
+  }
+  .currency-toggle button{
+    border:none; background:transparent; color:var(--muted);
+    font-family:'Rajdhani',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.06em;
+    padding:6px 14px; border-radius:16px; transition:all .15s ease;
+  }
+  .currency-toggle button.active{background:var(--blue); color:#0a0d11;}
+  .currency-toggle button:not(.active):hover{color:var(--text);}
+  .rate-note{font-size:10.5px; color:var(--muted-dim); margin-top:10px;}
+
+  /* ---------- PODIUM ---------- */
+  .podium{
+    display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px;
+    max-width:1120px; margin:0 auto; padding:0 24px 40px;
+  }
+  .podium-card{
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    padding:24px 18px; text-align:center; position:relative;
+    transition:transform .15s ease, border-color .15s ease;
+  }
+  .podium-card:hover{transform:translateY(-4px);}
+  .podium-card.rank2{order:1; margin-top:20px; border-color:rgba(201,211,220,0.25);}
+  .podium-card.rank1{order:2; border-color:rgba(255,201,60,0.4); box-shadow:0 0 40px rgba(255,201,60,0.08);}
+  .podium-card.rank3{order:3; margin-top:32px; border-color:rgba(224,137,74,0.3);}
+  .podium-medal{
+    width:46px; height:46px; border-radius:50%; margin:0 auto 14px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:18px; font-weight:700; font-family:'Rajdhani',sans-serif;
+  }
+  .podium-card.rank1 .podium-medal{background:rgba(255,201,60,0.14); color:var(--gold); border:1px solid rgba(255,201,60,0.4);}
+  .podium-card.rank2 .podium-medal{background:rgba(201,211,220,0.12); color:var(--silver); border:1px solid rgba(201,211,220,0.3);}
+  .podium-card.rank3 .podium-medal{background:rgba(224,137,74,0.14); color:var(--bronze); border:1px solid rgba(224,137,74,0.4);}
+  .podium-name{font-size:16px; font-weight:700; margin-bottom:6px; word-break:break-word;}
+  .podium-amount{font-size:20px; font-weight:700; font-family:'Rajdhani',sans-serif;}
+  .podium-card.rank1 .podium-amount{color:var(--gold);}
+  .podium-card.rank2 .podium-amount{color:var(--silver);}
+  .podium-card.rank3 .podium-amount{color:var(--bronze);}
+  .podium-label{font-size:10px; letter-spacing:0.1em; color:var(--muted-dim); font-weight:700; margin-top:4px;}
+
+  /* ---------- FULL TABLE ---------- */
+  .panel{
+    background:var(--card); border:1px solid var(--border);
+    border-radius:12px; padding:24px; max-width:1120px; margin:0 auto 56px;
+  }
+  .panel-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;}
+  .eyebrow-sm{font-size:11px; font-weight:700; letter-spacing:0.12em; color:var(--blue);}
+  .panel h2{font-size:20px; font-weight:700; color:var(--text);}
+  .updated{font-size:11px; color:var(--muted-dim); font-weight:600;}
+
+  table.wager{width:100%; border-collapse:collapse; font-size:14px;}
+  table.wager thead th{
+    text-align:left; font-size:11px; color:var(--muted-dim); font-weight:700;
+    letter-spacing:0.08em; padding-bottom:12px; border-bottom:1px solid var(--border);
+  }
+  table.wager thead th:last-child{text-align:right;}
+  table.wager tbody td{padding:14px 0; border-bottom:1px solid var(--border);}
+  table.wager tbody tr:last-child td{border-bottom:none;}
+  table.wager tbody td:last-child{text-align:right; color:var(--text); font-weight:600; font-family:'Rajdhani',sans-serif; font-size:15px;}
+  table.wager tbody tr{transition:background .15s ease;}
+  table.wager tbody tr:hover{background:rgba(255,255,255,0.02);}
+  .rank-row{display:flex; align-items:center; gap:10px;}
+  .rank-num{width:20px; color:var(--muted-dim); font-weight:700; font-family:'Rajdhani',sans-serif;}
+  .rank-1{color:var(--gold);}
+  .rank-2{color:var(--silver);}
+  .rank-3{color:var(--bronze);}
+  tr.top-rank td:first-child .rank-row{font-weight:700;}
+  tr.r1{background:rgba(255,201,60,0.06);}
+  tr.r2{background:rgba(201,211,220,0.04);}
+  tr.r3{background:rgba(224,137,74,0.05);}
+
+  .back-link{
+    display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:700;
+    color:var(--blue); margin-top:16px; padding-top:16px; border-top:1px solid var(--border);
+  }
+  .back-link:hover{color:#c688ff;}
+
+  @media (max-width:700px){
+    .page-head h1{font-size:38px;}
+    .podium{grid-template-columns:1fr; gap:12px;}
+    .podium-card.rank1,.podium-card.rank2,.podium-card.rank3{order:0; margin-top:0;}
+    .nav-links{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="bar">
+    <a class="logo" href="index.html">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 8L6 11L12 4L18 11L22 8L20 19H4L2 8Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+      </svg>
+      L3NAIDE
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#home">HOME</a></li>
+      <li><a href="index.html#promos">PROMOS</a></li>
+      <li><a href="leaderboard.html" class="active">LEADERBOARD</a></li>
+      <li><a href="index.html#community">COMMUNITY</a></li>
+    </ul>
+    <a class="btn outline-blue" href="https://kick.com/L3naide" target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 4v16M20 4l-8 8 8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      WATCH LIVE
+    </a>
+  </nav>
+</header>
+
+<div class="page-head">
+  <div class="eyebrow">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.4 7.2H22l-6 4.4 2.3 7.4L12 16.8 5.7 21l2.3-7.4-6-4.4h7.6L12 2z" fill="currentColor"/></svg>
+    WAGER RACE
+  </div>
+  <h1>FULL LEADERBOARD</h1>
+  <p>The top wagerers competing for the top spot. Rankings update as the race continues — keep grinding.</p>
+  <span class="live-pill"><span class="dot-red"></span> LIVE</span>
+  <span class="currency-toggle" id="currencyToggle">
+    <button type="button" class="active" data-currency="USD">USD</button>
+    <button type="button" data-currency="PHP">PHP</button>
+  </span>
+  <div class="rate-note" id="rateNote"></div>
+</div>
+
+<div class="podium">
+  <div class="podium-card rank2">
+    <div class="podium-medal">2</div>
+    <div class="podium-name">mangben</div>
+    <div class="podium-amount amount" data-usd="10469.58"></div>
+    <div class="podium-label">WAGERED</div>
+  </div>
+  <div class="podium-card rank1">
+    <div class="podium-medal">1</div>
+    <div class="podium-name">peakpeaky2k</div>
+    <div class="podium-amount amount" data-usd="237209.17"></div>
+    <div class="podium-label">WAGERED</div>
+  </div>
+  <div class="podium-card rank3">
+    <div class="podium-medal">3</div>
+    <div class="podium-name">joeann29</div>
+    <div class="podium-amount amount" data-usd="5498.60"></div>
+    <div class="podium-label">WAGERED</div>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-head">
+    <div>
+      <span class="eyebrow-sm">TOP 10</span>
+      <h2>LIVE STANDINGS</h2>
+    </div>
+    <span class="updated">UPDATES EVERY MONTH</span>
+  </div>
+  <table class="wager">
+    <thead><tr><th>PLAYER</th><th id="wageredHead">WAGERED (USD)</th></tr></thead>
+    <tbody>
+      <tr class="top-rank r1"><td><div class="rank-row"><svg class="rank-1" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M5 19h14l1-11-5 4-3-6-3 6-5-4z"/></svg> peakpeaky2k</div></td><td class="amount" data-usd="237209.17"></td></tr>
+      <tr class="r2"><td><div class="rank-row"><span class="rank-num rank-2">2</span> mangben</div></td><td class="amount" data-usd="10469.58"></td></tr>
+      <tr class="r3"><td><div class="rank-row"><span class="rank-num rank-3">3</span> joeann29</div></td><td class="amount" data-usd="5498.60"></td></tr>
+      <tr><td><div class="rank-row"><span class="rank-num">4</span> marjcruz2</div></td><td class="amount" data-usd="3396.46"></td></tr>
+      <tr><td><div class="rank-row"><span class="rank-num">5</span> quimzon43</div></td><td class="amount" data-usd="3276.45"></td></tr>
+      <tr><td><div class="rank-row"><span class="rank-num">6</span> nolan420</div></td><td class="amount" data-usd="2424.02"></td></tr>
+      <tr><td><div class="rank-row"><span class="rank-num">7</span> j0yzz2</div></td><td class="amount" data-usd="1013.21"></td></tr>
+      <tr><td><div class="rank-row"><span class="rank-num">8</span> pixelava</div></td><td class="amount" data-usd="97.20"></td></tr>
+      <tr><td><div class="rank-row"><span class="rank-num">9</span> julsantiago</div></td><td class="amount" data-usd="45.05"></td></tr>
+      <tr><td><div class="rank-row"><span class="rank-num">10</span> daffniesegovia</div></td><td class="amount" data-usd="35.13"></td></tr>
+    </tbody>
+  </table>
+  <a class="back-link" href="index.html">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M11 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    BACK TO HOME
+  </a>
+</div>
+
+
+<script>
+  // Exchange rate: 1 USD = this many PHP. Update this number whenever you want to refresh the rate.
+  const USD_TO_PHP = 58.50;
+
+  const amountEls = document.querySelectorAll('.amount');
+  const wageredHead = document.getElementById('wageredHead');
+  const rateNote = document.getElementById('rateNote');
+  const toggleBtns = document.querySelectorAll('#currencyToggle button');
+  let currentCurrency = 'USD';
+
+  function formatAmount(usdValue, currency){
+    const value = currency === 'USD' ? usdValue : usdValue * USD_TO_PHP;
+    const symbol = currency === 'USD' ? '$' : '₱';
+    return symbol + value.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+  }
+
+  function render(currency){
+    amountEls.forEach(el=>{
+      const usd = parseFloat(el.getAttribute('data-usd'));
+      el.textContent = formatAmount(usd, currency);
+    });
+    wageredHead.textContent = 'WAGERED (' + currency + ')';
+    rateNote.textContent = currency === 'PHP'
+      ? 'Converted at 1 USD ≈ ₱' + USD_TO_PHP.toFixed(2) + '. Source amounts are tracked in USD.'
+      : '';
+    toggleBtns.forEach(b=> b.classList.toggle('active', b.getAttribute('data-currency') === currency));
+  }
+
+  toggleBtns.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      currentCurrency = btn.getAttribute('data-currency');
+      render(currentCurrency);
+    });
+  });
+
+  render(currentCurrency);
+</script>
+
+</body>
+</html>
