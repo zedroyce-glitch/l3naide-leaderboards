@@ -248,8 +248,8 @@
   <p>The top wagerers competing for the top spot. Rankings update as the race continues — keep grinding.</p>
   <span class="live-pill"><span class="dot-red"></span> LIVE</span>
   <span class="currency-toggle" id="currencyToggle">
-    <button type="button" data-currency="USD">USD</button>
     <button type="button" class="active" data-currency="PHP">PHP</button>
+    <button type="button" data-currency="USD">USD</button>
   </span>
   <div class="rate-note" id="rateNote"></div>
 </div>
@@ -287,7 +287,7 @@
     </div>
   </div>
   <table class="wager">
-    <thead><tr><th>PLAYER</th><th id="wageredHead">WAGERED (USD)</th></tr></thead>
+    <thead><tr><th>PLAYER</th><th id="wageredHead">WAGERED (PHP)</th></tr></thead>
     <tbody>
       <tr class="top-rank r1"><td><div class="rank-row"><svg class="rank-1" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M5 19h14l1-11-5 4-3-6-3 6-5-4z"/></svg> peakpeaky2k</div></td><td class="amount" data-usd="237209.17"></td></tr>
       <tr class="r2"><td><div class="rank-row"><span class="rank-num rank-2">2</span> mangben</div></td><td class="amount" data-usd="10469.58"></td></tr>
@@ -319,7 +319,7 @@
 
 <script>
   // Exchange rate: 1 USD = this many PHP. Update this number whenever you want to refresh the rate.
-  const USD_TO_PHP = 58.50;
+  const USD_TO_PHP = 61.74;
 
   const amountEls = document.querySelectorAll('.amount');
   const wageredHead = document.getElementById('wageredHead');

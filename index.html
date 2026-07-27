@@ -742,7 +742,7 @@
         <div>
           <div class="p-rank">#1</div>
           <div class="p-name">peakpeaky2k</div>
-          <div class="p-amount">$237,209.17</div>
+          <div class="p-amount amount-php" data-usd="237209.17">—</div>
         </div>
       </div>
       <div class="podium-23">
@@ -751,7 +751,7 @@
           <div>
             <div class="p-rank">#2</div>
             <div class="p-name">mangben</div>
-            <div class="p-amount">$10,469.58</div>
+            <div class="p-amount amount-php" data-usd="10469.58">—</div>
           </div>
         </div>
         <div class="podium-card">
@@ -759,7 +759,7 @@
           <div>
             <div class="p-rank">#3</div>
             <div class="p-name">joeann29</div>
-            <div class="p-amount">$5,498.60</div>
+            <div class="p-amount amount-php" data-usd="5498.60">—</div>
           </div>
         </div>
       </div>
@@ -768,11 +768,11 @@
         <table class="wager">
           <thead><tr><th class="rankcol">RANK</th><th>PLAYER</th><th>WAGERED</th></tr></thead>
           <tbody>
-            <tr><td><span class="rank-circle gold">1</span></td><td>peakpeaky2k</td><td>$237,209.17</td></tr>
-            <tr><td><span class="rank-circle">2</span></td><td>mangben</td><td>$10,469.58</td></tr>
-            <tr><td><span class="rank-circle">3</span></td><td>joeann29</td><td>$5,498.60</td></tr>
-            <tr><td><span class="rank-circle">4</span></td><td>marjcruz2</td><td>$3,396.46</td></tr>
-            <tr><td><span class="rank-circle">5</span></td><td>quimzon43</td><td>$3,276.45</td></tr>
+            <tr><td><span class="rank-circle gold">1</span></td><td>peakpeaky2k</td><td class="amount-php" data-usd="237209.17">—</td></tr>
+            <tr><td><span class="rank-circle">2</span></td><td>mangben</td><td class="amount-php" data-usd="10469.58">—</td></tr>
+            <tr><td><span class="rank-circle">3</span></td><td>joeann29</td><td class="amount-php" data-usd="5498.60">—</td></tr>
+            <tr><td><span class="rank-circle">4</span></td><td>marjcruz2</td><td class="amount-php" data-usd="3396.46">—</td></tr>
+            <tr><td><span class="rank-circle">5</span></td><td>quimzon43</td><td class="amount-php" data-usd="3276.45">—</td></tr>
           </tbody>
         </table>
       </div>
@@ -982,7 +982,7 @@
 
   // Sidebar stats: convert USD source values to PHP for display
   // Keep this in sync with the rate used on /leaderboard/
-  const USD_TO_PHP = 58.50;
+  const USD_TO_PHP = 61.74;
   document.querySelectorAll('.amount-php').forEach(el=>{
     const usd = parseFloat(el.getAttribute('data-usd'));
     el.textContent = '\u20b1' + (usd * USD_TO_PHP).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
