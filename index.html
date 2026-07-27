@@ -116,11 +116,27 @@
     display:flex; align-items:center; gap:10px;
     font-size:12.5px; font-weight:700; letter-spacing:0.06em; color:var(--muted);
     padding:10px 12px; border-radius:8px; border-left:2px solid transparent;
-    transition:all .15s ease;
+    transition:color .18s ease, background .18s ease, border-color .18s ease, padding-left .18s ease;
+    position:relative; overflow:hidden;
   }
-  .side-tabs a svg{flex-shrink:0; opacity:.8;}
-  .side-tabs a:hover{color:var(--text); background:rgba(255,255,255,0.03);}
+  .side-tabs a svg.icon{flex-shrink:0; opacity:.8; transition:transform .2s ease, opacity .2s ease;}
+  .side-tabs a:hover{color:var(--text); background:rgba(255,255,255,0.04); padding-left:16px;}
+  .side-tabs a:hover svg.icon{transform:translateX(1px); opacity:1;}
   .side-tabs a.active{color:var(--purple); background:rgba(59,130,246,0.08); border-left-color:var(--purple);}
+  .side-tabs a.active svg.icon{opacity:1;}
+  .side-tabs a .go{
+    margin-left:auto; flex-shrink:0; opacity:0; transform:translateX(-6px);
+    transition:opacity .18s ease, transform .18s ease; color:var(--purple);
+  }
+  .side-tabs a:hover .go, .side-tabs a.active .go{opacity:1; transform:translateX(0);}
+  .side-tabs a.live-tab{color:var(--text);}
+  .side-tabs a.live-tab:hover{color:#ff5c5c; background:rgba(255,92,92,0.08); padding-left:16px;}
+  .side-tabs a.live-tab .pulse-dot{
+    margin-left:auto; width:6px; height:6px; border-radius:50%; flex-shrink:0;
+    background:#ff5c5c; box-shadow:0 0 8px rgba(255,92,92,0.7);
+    animation:pulseDot 1.6s ease-in-out infinite;
+  }
+  @keyframes pulseDot{0%,100%{opacity:1; transform:scale(1);} 50%{opacity:.35; transform:scale(.65);}}
 
   .side-ctas{display:flex; flex-direction:column; gap:8px;}
   .cta-solid{
@@ -131,6 +147,13 @@
     box-shadow:0 0 24px rgba(59,130,246,0.25);
   }
   .cta-solid:hover{filter:brightness(1.08); transform:translateY(-1px);}
+  .cta-code{
+    display:flex; align-items:center; justify-content:center; gap:6px;
+    background:rgba(240,185,66,0.08); border:1px solid rgba(240,185,66,0.3);
+    color:var(--gold); font-size:11.5px; font-weight:700; letter-spacing:0.08em;
+    padding:9px; border-radius:9px;
+  }
+  .cta-code b{color:var(--gold); font-family:'Rajdhani',sans-serif; font-size:12.5px; letter-spacing:0.1em;}
   .cta-outline{
     display:flex; align-items:center; justify-content:center; gap:6px;
     background:var(--card); border:1px solid var(--border-strong);
@@ -205,11 +228,16 @@
     background:var(--card); border:1px solid rgba(240,185,66,0.35); border-radius:14px;
     padding:20px 24px; display:flex; align-items:center; gap:16px; margin-bottom:14px;
     box-shadow:0 0 30px rgba(240,185,66,0.05);
+    transition:transform .3s cubic-bezier(.34,1.56,.64,1);
   }
   .podium-23{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:40px;}
   .podium-card{
     background:var(--card); border:1px solid var(--border); border-radius:14px;
     padding:16px 20px; display:flex; align-items:center; gap:14px;
+    transition:transform .3s cubic-bezier(.34,1.56,.64,1);
+  }
+  .podium-1:hover, .podium-card:hover{
+    transform:translateY(-6px) scale(1.03);
   }
   .medal{
     width:46px; height:46px; border-radius:10px; flex-shrink:0;
@@ -274,6 +302,7 @@
   .hero-flex-solo{justify-content:center; text-align:center; width:100%;}
   .hero-flex-solo .hero-intro{flex:0 1 640px; display:flex; flex-direction:column; align-items:center;}
   .hero-flex-solo .hero-desc{margin-left:auto; margin-right:auto;}
+  .hero-flex-solo .hero-btns{justify-content:center;}
 
   /* ---------- stream section (revealed on scroll) ---------- */
   .stream-section{padding:40px 40px 80px;}
@@ -422,6 +451,10 @@
   .event-card{
     background:linear-gradient(160deg,#241030,#120a1a); border-radius:12px; overflow:hidden;
     border:1px solid var(--border); margin-top:20px; max-width:600px;
+    transition:transform .15s ease;
+  }
+  .event-card:hover, .pool-card:hover{
+    transform:translateY(-3px);
   }
   .event-visual{
     height:130px; position:relative;
@@ -454,6 +487,7 @@
   .pool-card{
     background:linear-gradient(160deg,#2a1f10,#1a0a1c); border-radius:12px; overflow:hidden;
     border:1px solid var(--border);
+    transition:transform .15s ease;
   }
   .pool-visual{
     height:130px; position:relative;
@@ -486,6 +520,10 @@
     display:flex; align-items:center; justify-content:space-between; gap:24px;
     border:1px solid var(--border); border-radius:16px;
     padding:32px 34px; margin:0 auto 24px; width:calc(100% - 80px); max-width:1120px; flex-wrap:wrap;
+    transition:transform .3s cubic-bezier(.34,1.56,.64,1);
+  }
+  .community-bar:hover, .sponsor-bar:hover{
+    transform:translateY(-6px) scale(1.03);
   }
   .community-bar{background:linear-gradient(160deg,#10203a,#080d16);}
   .community-bar::before{
@@ -589,27 +627,31 @@
 
     <nav class="side-tabs">
       <a href="#home" data-nav class="active">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M3 11l9-7 9 7M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M3 11l9-7 9 7M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
         HOME
+        <svg class="go" width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
-      <a href="#promos" data-nav>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 12v7a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-7M3 8l9-5 9 5-9 5-9-5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-        PROMOS
+      <a href="https://kick.com/L3naide" target="_blank" rel="noopener" class="live-tab" data-section="stream">
+        <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" fill="currentColor"/><path d="M8.5 13.5a5 5 0 0 1 7 0M5.5 10.5a9 9 0 0 1 13 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        LIVE STREAM
+        <span class="pulse-dot"></span>
       </a>
       <a href="#leaderboard" data-nav>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 19h14l1-11-5 4-3-6-3 6-5-4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 19h14l1-11-5 4-3-6-3 6-5-4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
         LEADERBOARD
+        <svg class="go" width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#promos" data-nav>
+        <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 12v7a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-7M3 8l9-5 9 5-9 5-9-5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        PROMOS
+        <svg class="go" width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
       <a href="#community" data-nav>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M3 18v-2a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v2M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" stroke="currentColor" stroke-width="1.8"/></svg>
+        <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M3 18v-2a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v2M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" stroke="currentColor" stroke-width="1.8"/></svg>
         COMMUNITY
+        <svg class="go" width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </nav>
-
-    <div class="side-ctas">
-      <a class="cta-solid" href="https://stake.bz/?c=zyor&offer=zyor" target="_blank" rel="noopener">JOIN</a>
-      <a class="cta-outline" href="#leaderboard" data-nav>LEADERBOARDS</a>
-    </div>
 
     <div class="side-stats">
       <div class="stat-box highlight">
@@ -625,8 +667,12 @@
         <div class="stat-value">80</div>
       </div>
       <div class="stat-box">
+        <div class="stat-label">TOTAL WAGERED</div>
+        <div class="stat-value amount-php" data-usd="263464.87">—</div>
+      </div>
+      <div class="stat-box">
         <div class="stat-label">TOP WAGER</div>
-        <div class="stat-value">$237,209.17</div>
+        <div class="stat-value amount-php" data-usd="237209.17">—</div>
       </div>
     </div>
 
@@ -662,6 +708,12 @@
           <h1 class="hero-name">L3NAIDE</h1>
           <p class="hero-tag">GAMER. CONTENT CREATOR. COMMUNITY BUILDER.</p>
           <p class="hero-desc">Building a community one stream at a time — clutch moments, late-night grinds, and no shortage of chaos. Jump in the chat, follow the wager race, and grab your share of the pool.</p>
+          <div class="hero-btns">
+            <a class="btn solid-purple" href="https://stake.bz/?c=zyor&offer=zyor" target="_blank" rel="noopener">
+              JOIN NOW
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -913,13 +965,27 @@
   });
 
   // Highlight tab on scroll
-  const sections = ['home','promos','leaderboard','community'].map(id=>document.getElementById(id));
+  const sections = ['home','stream','leaderboard','promos','community'].map(id=>document.getElementById(id));
   window.addEventListener('scroll', ()=>{
     let current = sections[0];
     sections.forEach(s=>{ if(s && window.scrollY >= s.offsetTop - 140) current = s; });
+    // Near the bottom of the page: force the last section active even if its
+    // own threshold was never reachable (e.g. short trailing content).
+    if(window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4){
+      current = sections[sections.length - 1];
+    }
     document.querySelectorAll('.side-tabs a').forEach(l=>{
-      l.classList.toggle('active', l.getAttribute('href') === '#'+current.id);
+      const isMatch = l.getAttribute('href') === '#'+current.id || l.getAttribute('data-section') === current.id;
+      l.classList.toggle('active', isMatch);
     });
+  });
+
+  // Sidebar stats: convert USD source values to PHP for display
+  // Keep this in sync with the rate used on /leaderboard/
+  const USD_TO_PHP = 58.50;
+  document.querySelectorAll('.amount-php').forEach(el=>{
+    const usd = parseFloat(el.getAttribute('data-usd'));
+    el.textContent = '\u20b1' + (usd * USD_TO_PHP).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
   });
 
   // Simple dim/darker theme toggle
