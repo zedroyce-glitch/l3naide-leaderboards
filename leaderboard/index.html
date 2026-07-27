@@ -66,12 +66,20 @@
   .logo svg{flex-shrink:0;}
   .nav-links{display:flex; gap:36px; list-style:none;}
   .nav-links a{
+    position:relative; display:inline-flex; align-items:center; gap:6px;
     font-size:13px; font-weight:600; letter-spacing:0.12em;
     color:var(--muted); padding-bottom:6px; border-bottom:2px solid transparent;
     transition:color .15s ease, border-color .15s ease;
   }
   .nav-links a:hover{color:var(--text);}
   .nav-links a.active{color:var(--blue); border-color:var(--blue);}
+  .nav-links a.live-link{color:var(--text);}
+  .nav-links a.live-link:hover{color:#ff5c5c;}
+  .nav-links a.live-link .pulse-dot{
+    width:6px; height:6px; border-radius:50%; background:#ff5c5c;
+    box-shadow:0 0 8px rgba(255,92,92,0.7); animation:pulseDot 1.6s ease-in-out infinite;
+  }
+  @keyframes pulseDot{0%,100%{opacity:1; transform:scale(1);} 50%{opacity:.35; transform:scale(.65);}}
   .btn{
     display:inline-flex; align-items:center; gap:8px;
     font-size:13px; font-weight:600; letter-spacing:0.06em;
@@ -160,6 +168,9 @@
   .eyebrow-sm{font-size:11px; font-weight:700; letter-spacing:0.12em; color:var(--blue);}
   .panel h2{font-size:20px; font-weight:700; color:var(--text);}
   .updated{font-size:11px; color:var(--muted-dim); font-weight:600;}
+  .panel-head-right{display:flex; flex-direction:column; align-items:flex-end; gap:6px;}
+  .total-wagered{font-size:12px; color:var(--muted); font-weight:600;}
+  .total-wagered .amount{color:var(--gold); font-weight:700; font-family:'Rajdhani',sans-serif; font-size:14px;}
 
   table.wager{width:100%; border-collapse:collapse; font-size:14px;}
   table.wager thead th{
@@ -216,12 +227,13 @@
     </a>
     <ul class="nav-links">
       <li><a href="/#home">HOME</a></li>
+      <li><a href="https://kick.com/L3naide" target="_blank" rel="noopener" class="live-link">LIVE STREAM <span class="pulse-dot"></span></a></li>
       <li><a href="/#promos">PROMOS</a></li>
       <li><a href="/leaderboard/" class="active">LEADERBOARD</a></li>
       <li><a href="/#community">COMMUNITY</a></li>
     </ul>
     <a class="btn outline-blue" href="https://kick.com/L3naide" target="_blank" rel="noopener">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 4v16M20 4l-8 8 8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="0" y="0" width="6" height="24"/><rect x="18" y="0" width="6" height="3"/><rect x="15" y="3" width="6" height="3"/><rect x="12" y="6" width="6" height="3"/><rect x="6" y="9" width="6" height="6"/><rect x="12" y="15" width="6" height="3"/><rect x="15" y="18" width="6" height="3"/><rect x="18" y="21" width="6" height="3"/></svg>
       WATCH LIVE
     </a>
   </nav>
@@ -236,8 +248,8 @@
   <p>The top wagerers competing for the top spot. Rankings update as the race continues — keep grinding.</p>
   <span class="live-pill"><span class="dot-red"></span> LIVE</span>
   <span class="currency-toggle" id="currencyToggle">
-    <button type="button" class="active" data-currency="USD">USD</button>
-    <button type="button" data-currency="PHP">PHP</button>
+    <button type="button" class="active" data-currency="PHP">PHP</button>
+    <button type="button" data-currency="USD">USD</button>
   </span>
   <div class="rate-note" id="rateNote"></div>
 </div>
@@ -269,10 +281,13 @@
       <span class="eyebrow-sm">TOP 10</span>
       <h2>LIVE STANDINGS</h2>
     </div>
-    <span class="updated">UPDATES EVERY MONTH</span>
+    <div class="panel-head-right">
+      <span class="updated">UPDATES EVERY MONTH</span>
+      <span class="total-wagered">TOTAL WAGERED: <span class="amount" data-usd="263464.87"></span></span>
+    </div>
   </div>
   <table class="wager">
-    <thead><tr><th>PLAYER</th><th id="wageredHead">WAGERED (USD)</th></tr></thead>
+    <thead><tr><th>PLAYER</th><th id="wageredHead">WAGERED (PHP)</th></tr></thead>
     <tbody>
       <tr class="top-rank r1"><td><div class="rank-row"><svg class="rank-1" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M5 19h14l1-11-5 4-3-6-3 6-5-4z"/></svg> peakpeaky2k</div></td><td class="amount" data-usd="237209.17"></td></tr>
       <tr class="r2"><td><div class="rank-row"><span class="rank-num rank-2">2</span> mangben</div></td><td class="amount" data-usd="10469.58"></td></tr>
@@ -304,13 +319,13 @@
 
 <script>
   // Exchange rate: 1 USD = this many PHP. Update this number whenever you want to refresh the rate.
-  const USD_TO_PHP = 58.50;
+  const USD_TO_PHP = 61.71;
 
   const amountEls = document.querySelectorAll('.amount');
   const wageredHead = document.getElementById('wageredHead');
   const rateNote = document.getElementById('rateNote');
   const toggleBtns = document.querySelectorAll('#currencyToggle button');
-  let currentCurrency = 'USD';
+  let currentCurrency = 'PHP';
 
   function formatAmount(usdValue, currency){
     const value = currency === 'USD' ? usdValue : usdValue * USD_TO_PHP;
