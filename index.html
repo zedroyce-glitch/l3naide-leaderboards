@@ -275,6 +275,7 @@
 
   /* ---------- shared section styling ---------- */
   .section{padding:48px 40px; max-width:1120px; margin:0 auto;}
+  .stream-section{max-width:none;}
   .section-head{margin-bottom:24px;}
   .eyebrow-sm{font-size:11px; font-weight:700; letter-spacing:0.12em; color:var(--purple); display:block; margin-bottom:6px;}
   .section-head h2{font-size:24px; font-weight:700;}
@@ -307,7 +308,7 @@
   /* ---------- stream section (revealed on scroll) ---------- */
   .stream-section{padding:40px 40px 80px;}
   .stream-wrap{max-width:980px; margin:0 auto; text-align:center;}
-  .stream-wrap.has-two{max-width:1720px;}
+  .stream-wrap.has-two{max-width:none;}
   .stream-eyebrow{font-size:12px; font-weight:700; letter-spacing:0.2em; color:var(--muted-dim); margin-bottom:10px;}
   .stream-title{font-size:46px; font-weight:700; margin-bottom:32px;}
   .stream-card{
@@ -327,12 +328,9 @@
   .stream-col{display:flex; flex-direction:column; align-items:center;}
   .stream-col-label{font-size:11px; font-weight:700; letter-spacing:0.15em; color:var(--muted-dim); margin-bottom:10px;}
 
-  @media (max-width:1500px){
-    .stream-grid{grid-template-columns:1fr; gap:56px;}
-    .stream-wrap.has-two{max-width:980px;}
-  }
-  @media (max-width:700px){
+  @media (max-width:800px){
     .stream-title{font-size:32px;}
+    .stream-grid{grid-template-columns:1fr; gap:48px;}
   }
 
   /* kick card */
