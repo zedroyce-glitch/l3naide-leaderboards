@@ -307,6 +307,7 @@
   /* ---------- stream section (revealed on scroll) ---------- */
   .stream-section{padding:40px 40px 80px;}
   .stream-wrap{max-width:980px; margin:0 auto; text-align:center;}
+  .stream-wrap.has-two{max-width:1720px;}
   .stream-eyebrow{font-size:12px; font-weight:700; letter-spacing:0.2em; color:var(--muted-dim); margin-bottom:10px;}
   .stream-title{font-size:46px; font-weight:700; margin-bottom:32px;}
   .stream-card{
@@ -321,14 +322,17 @@
   }
   .stream-visit:hover{color:#c688ff;}
 
-  /* ---------- two streams side by side ---------- */
-  .stream-grid{display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:start;}
+  /* ---------- two streams side by side, same size as a single one ---------- */
+  .stream-grid{display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start;}
   .stream-col{display:flex; flex-direction:column; align-items:center;}
   .stream-col-label{font-size:11px; font-weight:700; letter-spacing:0.15em; color:var(--muted-dim); margin-bottom:10px;}
 
+  @media (max-width:1500px){
+    .stream-grid{grid-template-columns:1fr; gap:56px;}
+    .stream-wrap.has-two{max-width:980px;}
+  }
   @media (max-width:700px){
     .stream-title{font-size:32px;}
-    .stream-grid{grid-template-columns:1fr; gap:36px;}
   }
 
   /* kick card */
@@ -725,7 +729,7 @@
     </section>
 
     <section class="section stream-section" id="stream">
-      <div class="stream-wrap">
+      <div class="stream-wrap has-two">
         <div class="stream-eyebrow">KICK &middot; PLAYER</div>
         <h2 class="stream-title">The Stream</h2>
         <div class="stream-grid">
