@@ -321,8 +321,14 @@
   }
   .stream-visit:hover{color:#c688ff;}
 
+  /* ---------- two streams side by side ---------- */
+  .stream-grid{display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:start;}
+  .stream-col{display:flex; flex-direction:column; align-items:center;}
+  .stream-col-label{font-size:11px; font-weight:700; letter-spacing:0.15em; color:var(--muted-dim); margin-bottom:10px;}
+
   @media (max-width:700px){
     .stream-title{font-size:32px;}
+    .stream-grid{grid-template-columns:1fr; gap:36px;}
   }
 
   /* kick card */
@@ -722,13 +728,28 @@
       <div class="stream-wrap">
         <div class="stream-eyebrow">KICK &middot; PLAYER</div>
         <h2 class="stream-title">The Stream</h2>
-        <div class="stream-card" id="kick">
-          <iframe id="streamIframe" src="https://player.kick.com/L3naide?autoplay=true&muted=true" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe>
+        <div class="stream-grid">
+          <div class="stream-col">
+            <div class="stream-col-label">STREAM 1</div>
+            <div class="stream-card" id="kick">
+              <iframe id="streamIframe" src="https://player.kick.com/L3naide?autoplay=true&muted=true" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe>
+            </div>
+            <a class="stream-visit" href="https://kick.com/L3naide" target="_blank" rel="noopener">
+              Open on Kick
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+          <div class="stream-col">
+            <div class="stream-col-label">STREAM 2</div>
+            <div class="stream-card" id="kick2">
+              <iframe id="streamIframe2" src="https://player.kick.com/thisisnotlenaide?autoplay=true&muted=true" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe>
+            </div>
+            <a class="stream-visit" href="https://kick.com/thisisnotlenaide" target="_blank" rel="noopener">
+              Open on Kick
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
         </div>
-        <a class="stream-visit" href="https://kick.com/L3naide" target="_blank" rel="noopener">
-          Open on Kick
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
       </div>
     </section>
 
