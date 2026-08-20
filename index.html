@@ -94,10 +94,9 @@
 
   .side-logo{display:flex; align-items:center; gap:10px;}
   .side-logo .mark{
-    width:34px; height:34px; border-radius:9px; flex-shrink:0;
-    background:linear-gradient(135deg, var(--purple), var(--pink));
+    width:34px; height:34px; border-radius:50%; flex-shrink:0;
     display:flex; align-items:center; justify-content:center;
-    box-shadow:0 0 18px rgba(59,130,246,0.4);
+    overflow:hidden;
   }
   .side-logo .name{font-size:16px; font-weight:700; letter-spacing:0.06em;}
   .side-logo .tag{font-size:10.5px; color:var(--muted-dim); font-weight:600;}
@@ -637,7 +636,7 @@
   <aside class="sidebar">
     <div class="side-logo">
       <div class="mark">
-        <img src="l3naide-logo.png" alt="L3naide" style="width:100%;height:100%;object-fit:cover;border-radius:9px;">
+        <img src="l3naide-logo.png" alt="L3naide" style="width:100%;height:100%;object-fit:contain;">
       </div>
       <div>
         <div class="name">L3NAIDE</div>
