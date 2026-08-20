@@ -294,6 +294,15 @@
   .hero-tag{font-size:19px; font-weight:700; letter-spacing:0.03em; color:var(--text); margin-bottom:22px;}
   .hero-desc{font-size:16.5px; color:var(--muted); line-height:1.75; max-width:460px; margin-bottom:32px;}
   .hero-btns{display:flex; gap:12px; flex-wrap:wrap;}
+  .hero-partner-badge{
+    display:inline-flex; align-items:center; gap:7px;
+    font-size:12px; font-weight:700; letter-spacing:0.03em; color:var(--text);
+    background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.35);
+    padding:7px 14px; border-radius:20px; margin-bottom:20px; width:fit-content;
+    transition:all .15s ease;
+  }
+  .hero-partner-badge:hover{background:rgba(59,130,246,0.18); border-color:rgba(59,130,246,0.55);}
+  .hero-flex-solo .hero-partner-badge{margin-left:auto; margin-right:auto;}
   .kick-hero-section{padding:0;}
   .kick-hero-section .kick-card{flex-shrink:0;}
 
@@ -547,6 +556,18 @@
   }
   .icon-circle.tone-green{color:var(--green); border-color:rgba(126,211,33,0.35); background:rgba(126,211,33,0.08);}
   .icon-circle.tone-gold{color:var(--gold); border-color:rgba(240,185,66,0.4); background:rgba(240,185,66,0.08);}
+  .icon-circle.tone-blue{color:var(--purple); border-color:rgba(59,130,246,0.4); background:rgba(59,130,246,0.08);}
+  .partner-bar{background:linear-gradient(160deg,#0e1a2e,#160a20);}
+  .partner-bar::before{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background:
+      radial-gradient(ellipse 420px 320px at 88% 15%, rgba(59,130,246,0.2), transparent 60%),
+      radial-gradient(ellipse 380px 300px at 8% 95%, rgba(126,211,33,0.14), transparent 60%);
+  }
+  .partner-logo-badge{
+    width:64px; height:84px; border-radius:12px; object-fit:cover; object-position:top center; flex-shrink:0;
+    border:1px solid var(--border-strong); display:block;
+  }
   .community-left h3, .sponsor-left h3{font-size:22px; font-weight:700; margin-top:3px;}
   .sponsor-left p{font-size:13.5px; color:var(--muted); max-width:440px; margin-top:6px;}
   .social-row{position:relative; z-index:1; display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
@@ -708,6 +729,10 @@
           <h1 class="hero-name">L3NAIDE</h1>
           <p class="hero-tag">GAMER. CONTENT CREATOR. COMMUNITY BUILDER.</p>
           <p class="hero-desc">Building a community one stream at a time — clutch moments, late-night grinds, and no shortage of chaos. Jump in the chat, follow the wager race, and grab your share of the pool.</p>
+          <a class="hero-partner-badge" href="https://l.skin.club/826L3NAIDE1KS" target="_blank" rel="noopener">
+            <img src="skinclub-logo-crop.png" alt="Skin.Club" style="height:13px; width:auto; display:block;">
+            Partnered with skin.club
+          </a>
           <div class="hero-btns">
             <a class="btn solid-purple" href="https://stake.bz/?c=zyor&offer=zyor" target="_blank" rel="noopener">
               JOIN NOW
@@ -900,6 +925,23 @@
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
+    </section>
+
+    <section class="community-bar partner-bar" id="partner">
+      <div class="community-left">
+        <a href="https://l.skin.club/826L3NAIDE1KS" target="_blank" rel="noopener">
+          <img class="partner-logo-badge" src="skinclub-banner.png" alt="Skin.Club — 7% extra bonus for LENAIDE">
+        </a>
+        <div>
+          <span class="eyebrow-sm">OFFICIAL PARTNER</span>
+          <h3>NOW PARTNERED WITH SKIN.CLUB</h3>
+          <p style="font-size:13.5px; color:var(--muted); max-width:440px; margin-top:6px;">Trade, upgrade, and cash out your CS2 skins on skin.club — use my code for 7% extra on your first deposit.</p>
+        </div>
+      </div>
+      <a class="btn solid-purple" href="https://l.skin.club/826L3NAIDE1KS" target="_blank" rel="noopener">
+        TRADE ON SKIN.CLUB
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
     </section>
 
     <section class="sponsor-bar">
