@@ -298,11 +298,21 @@
     display:inline-flex; align-items:center; gap:7px;
     font-size:12px; font-weight:700; letter-spacing:0.03em; color:var(--text);
     background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.35);
-    padding:7px 14px; border-radius:20px; margin-bottom:20px; width:fit-content;
+    padding:7px 14px; border-radius:20px; width:fit-content;
     transition:all .15s ease;
   }
   .hero-partner-badge:hover{background:rgba(59,130,246,0.18); border-color:rgba(59,130,246,0.55);}
   .hero-flex-solo .hero-partner-badge{margin-left:auto; margin-right:auto;}
+  .stake-badge{
+    display:inline-flex; align-items:center; gap:7px;
+    font-size:12px; font-weight:700; letter-spacing:0.03em; color:var(--text);
+    background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.35);
+    padding:7px 14px; border-radius:20px; width:fit-content;
+    transition:all .15s ease;
+  }
+  .stake-badge:hover{background:rgba(59,130,246,0.18); border-color:rgba(59,130,246,0.55);}
+  .hero-flex-solo .stake-badge{margin-left:auto; margin-right:auto;}
+  .hero-badges{display:flex; flex-direction:column; align-items:center; gap:10px; margin-bottom:20px;}
   .kick-hero-section{padding:0;}
   .kick-hero-section .kick-card{flex-shrink:0;}
 
@@ -737,15 +747,14 @@
           <h1 class="hero-name">L3NAIDE</h1>
           <p class="hero-tag">GAMER. CONTENT CREATOR. COMMUNITY BUILDER.</p>
           <p class="hero-desc">Building a community one stream at a time — clutch moments, late-night grinds, and no shortage of chaos. Jump in the chat, follow the wager race, and grab your share of the pool.</p>
-          <a class="hero-partner-badge" href="https://l.skin.club/826L3NAIDE1KS" target="_blank" rel="noopener">
-            <img src="skinclub-logo-crop.png" alt="Skin.Club" style="height:13px; width:auto; display:block;">
-            Partnered with skin.club
-          </a>
-          <div class="hero-btns">
-            <a class="btn solid-purple" href="https://stake.bz/?c=zyor&offer=zyor" target="_blank" rel="noopener">
-              <img src="stake-logo.png" alt="Stake" style="height:16px; width:auto; display:block;">
-              JOIN STAKE
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="hero-badges">
+            <a class="hero-partner-badge" href="https://l.skin.club/826L3NAIDE1KS" target="_blank" rel="noopener">
+              <img src="skinclub-logo-crop.png" alt="Skin.Club" style="height:13px; width:auto; display:block;">
+              Partnered with skin.club
+            </a>
+            <a class="stake-badge" href="https://stake.bz/?c=zyor&offer=zyor" target="_blank" rel="noopener">
+              <img src="stake-logo.png" alt="Stake" style="height:13px; width:auto; display:block;">
+              Join with stake.com
             </a>
           </div>
         </div>
